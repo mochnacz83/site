@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Template de Layout</title>
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            /* Fundo semelhante ao modelo */
+            background:
+                radial-gradient(circle at 25% 20%, rgba(126, 0, 190, 0.35), transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(90, 0, 160, 0.35), transparent 30%),
+                linear-gradient(135deg, #18002d, #39006b, #170027);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100vh;
+
+            padding: 30px;
+        }
+
+
+        /* =====================================================
+           CONTAINER PRINCIPAL
+        ===================================================== */
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+
+            min-height: 467px;
+
+            background-color: #ffffff;
+
+            padding: 15px;
+
+            display: grid;
+
+            grid-template-rows:
+                80px
+                46px
+                244px
+                58px;
+
+            gap: 8px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* =====================================================
+           CABEÇALHO
+        ===================================================== */
+
+        .cabecalho {
+            background-color: #e8ebed;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .titulo {
+            background-color: #76a6d3;
+
+            border: 1px solid #5b8ebc;
+
+            padding: 2px 10px;
+
+            font-size: 28px;
+
+            font-weight: normal;
+
+            line-height: 1;
+
+            color: #000;
+        }
+
+
+        /* =====================================================
+           MENU
+        ===================================================== */
+
+        .menu {
+            background-color: #e8ebed;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-titulo {
+            background-color: #76a6d3;
+
+            border: 1px solid #5b8ebc;
+
+            width: 167px;
+
+            text-align: center;
+
+            padding: 2px;
+
+            font-size: 28px;
+
+            line-height: 1;
+
+            color: #000;
+        }
+
+
+        /* =====================================================
+           ÁREA PRINCIPAL
+        ===================================================== */
+
+        .conteudo-principal {
+            display: grid;
+
+            grid-template-columns:
+                153px
+                1fr
+                166px;
+
+            gap: 8px;
+
+            min-height: 0;
+        }
+
+
+        /* =====================================================
+           COLUNAS
+        ===================================================== */
+
+        .coluna-esquerda,
+        .conteudo,
+        .coluna-direita {
+            background-color: #e8ebed;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+
+        /* =====================================================
+           TÍTULOS DAS COLUNAS
+        ===================================================== */
+
+        .titulo-coluna {
+            background-color: #76a6d3;
+
+            border: 1px solid #5b8ebc;
+
+            font-size: 28px;
+
+            font-weight: normal;
+
+            line-height: 1.15;
+
+            text-align: center;
+
+            padding: 4px 8px;
+
+            color: #000;
+        }
+
+
+        /* =====================================================
+           CONTEÚDO CENTRAL
+        ===================================================== */
+
+        .titulo-conteudo {
+            background-color: #76a6d3;
+
+            border: 1px solid #5b8ebc;
+
+            font-size: 28px;
+
+            padding: 4px 8px;
+
+            color: #000;
+        }
+
+
+        /* =====================================================
+           RODAPÉ
+        ===================================================== */
+
+        .rodape {
+            background-color: #e8ebed;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+        .rodape-titulo {
+            background-color: #76a6d3;
+
+            border: 1px solid #5b8ebc;
+
+            width: 144px;
+
+            text-align: center;
+
+            padding: 2px;
+
+            font-size: 28px;
+
+            line-height: 1;
+
+            color: #000;
+        }
+
+
+        /* =====================================================
+           RESPONSIVIDADE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                min-height: auto;
+
+                grid-template-rows:
+                    80px
+                    50px
+                    auto
+                    60px;
+            }
+
+            .conteudo-principal {
+                grid-template-columns: 1fr;
+
+                grid-template-rows:
+                    150px
+                    250px
+                    150px;
+            }
+
+            .coluna-esquerda,
+            .coluna-direita {
+                min-height: 150px;
+            }
+
+            .titulo {
+                font-size: 24px;
+            }
+
+            .menu-titulo,
+            .titulo-coluna,
+            .titulo-conteudo,
+            .rodape-titulo {
+                font-size: 24px;
+            }
+        }
+
+
+        @media (max-width: 450px) {
+
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                padding: 8px;
+                gap: 6px;
+            }
+
+            .conteudo-principal {
+                gap: 6px;
+            }
+
+            .titulo {
+                font-size: 21px;
+            }
+
+            .menu-titulo,
+            .titulo-coluna,
+            .titulo-conteudo,
+            .rodape-titulo {
+                font-size: 21px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <main class="container">
+
+        <!-- ================= CABEÇALHO ================= -->
+
+        <header class="cabecalho">
+
+            <div class="titulo">
+                Cabeçalho
+            </div>
+
+        </header>
+
+
+        <!-- ================= MENU ================= -->
+
+        <nav class="menu">
+
+            <div class="menu-titulo">
+                Menu
+            </div>
+
+        </nav>
+
+
+        <!-- ================= CONTEÚDO ================= -->
+
+        <section class="conteudo-principal">
+
+            <!-- COLUNA ESQUERDA -->
+
+            <aside class="coluna-esquerda">
+
+                <div class="titulo-coluna">
+                    Coluna<br>
+                    Esquerda
+                </div>
+
+            </aside>
+
+
+            <!-- CONTEÚDO CENTRAL -->
+
+            <main class="conteudo">
+
+                <div class="titulo-conteudo">
+                    Conteúdo
+                </div>
+
+            </main>
+
+
+            <!-- COLUNA DIREITA -->
+
+            <aside class="coluna-direita">
+
+                <div class="titulo-coluna">
+                    Coluna<br>
+                    Direita
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- ================= RODAPÉ ================= -->
+
+        <footer class="rodape">
+
+            <div class="rodape-titulo">
+                Rodapé
+            </div>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

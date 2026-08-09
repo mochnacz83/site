@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Formulário para candidatura de professores."
+    >
+
+    <title>Candidatura para Professor</title>
+
+    <style>
+        /* ================================
+           RESET
+        ================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ================================
+           CONFIGURAÇÕES GERAIS
+        ================================= */
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(150, 0, 255, 0.25), transparent 25%),
+                radial-gradient(circle at 85% 80%, rgba(0, 220, 255, 0.12), transparent 25%),
+                linear-gradient(135deg, #17002f, #26004d, #16002f);
+            color: #ffffff;
+            padding: 40px 20px;
+        }
+
+        /* Elementos decorativos do fundo */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.15;
+            background-image:
+                linear-gradient(90deg, transparent 95%, #8c4dff 95%),
+                linear-gradient(0deg, transparent 95%, #8c4dff 95%);
+            background-size: 100px 100px;
+            z-index: -1;
+        }
+
+        /* ================================
+           CONTAINER
+        ================================= */
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(27, 4, 55, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 45px;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.45),
+                0 0 40px rgba(130, 0, 255, 0.12);
+            backdrop-filter: blur(10px);
+        }
+
+        /* ================================
+           CABEÇALHO
+        ================================= */
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.05;
+            font-style: italic;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        header h1 span {
+            color: #22e6f5;
+        }
+
+        header p {
+            color: #c8bdd8;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ================================
+           FORMULÁRIO
+        ================================= */
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        label .required {
+            color: #22e6f5;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            padding: 14px 15px;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #a99db9;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #22e6f5;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 3px rgba(34, 230, 245, 0.12);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        select option {
+            background: #26004d;
+            color: #ffffff;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* ================================
+           GRUPO DE CHECKBOX
+        ================================= */
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .checkbox-option {
+            position: relative;
+        }
+
+        .checkbox-option input {
+            position: absolute;
+            opacity: 0;
+            width: 1px;
+            height: 1px;
+        }
+
+        .checkbox-option label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-option label::before {
+            content: "";
+            width: 18px;
+            height: 18px;
+            border: 2px solid #8f819f;
+            border-radius: 4px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-option input:checked + label {
+            border-color: #22e6f5;
+            background: rgba(34, 230, 245, 0.08);
+            color: #22e6f5;
+        }
+
+        .checkbox-option input:checked + label::before {
+            background: #22e6f5;
+            border-color: #22e6f5;
+            box-shadow: inset 0 0 0 4px #26004d;
+        }
+
+        .checkbox-option input:focus-visible + label {
+            outline: 3px solid rgba(34, 230, 245, 0.35);
+            outline-offset: 2px;
+        }
+
+        /* ================================
+           TEXTO AUXILIAR
+        ================================= */
+
+        .helper-text {
+            font-size: 0.82rem;
+            color: #9d91ac;
+            line-height: 1.5;
+        }
+
+        /* ================================
+           BOTÃO
+        ================================= */
+
+        .submit-area {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 15px 35px;
+            background: #22e6f5;
+            color: #16002f;
+            font-size: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            background: #56edf7;
+            box-shadow: 0 10px 30px rgba(34, 230, 245, 0.25);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 3px;
+        }
+
+        /* ================================
+           MENSAGEM
+        ================================= */
+
+        #mensagem {
+            display: none;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 5px;
+            background: rgba(34, 230, 245, 0.1);
+            border: 1px solid rgba(34, 230, 245, 0.4);
+            color: #22e6f5;
+            line-height: 1.5;
+        }
+
+        #mensagem.sucesso {
+            display: block;
+        }
+
+        /* ================================
+           RODAPÉ
+        ================================= */
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #82758f;
+            font-size: 0.8rem;
+        }
+
+        /* ================================
+           RESPONSIVIDADE
+        ================================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .card {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .submit-area {
+                justify-content: stretch;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        /* ================================
+           ACESSIBILIDADE
+        ================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <section class="card" aria-labelledby="titulo">
+
+            <header>
+                <h1 id="titulo">
+                    Crie seu perfil para
+                    <span>lecionar</span>
+                </h1>
+
+                <p>
+                    Preencha os campos abaixo para se candidatar
+                    às oportunidades de ensino.
+                </p>
+            </header>
+
+
+            <!--
+                FORMULÁRIO
+                O formulário possui ID e NAME conforme solicitado.
+            -->
+
+            <form
+                id="form"
+                name="form"
+                method="post"
+                action="#"
+            >
+
+                <div class="form-grid">
+
+                    <!-- NOME -->
+
+                    <div class="form-group">
+
+                        <label for="nome">
+                            Nome completo
+                            <span class="required" aria-hidden="true">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome completo"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- IDADE -->
+
+                    <div class="form-group">
+
+                        <label for="idade">
+                            Idade
+                            <span class="required" aria-hidden="true">*</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="idade"
+                            name="idade"
+                            placeholder="Ex.: 30"
+                            min="18"
+                            max="100"
+                            autocomplete="bday-year"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- E-MAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            E-mail
+                            <span class="required" aria-hidden="true">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="seuemail@exemplo.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- MATÉRIA -->
+
+                    <div class="form-group">
+
+                        <label for="assunto">
+                            Matéria que deseja lecionar
+                            <span class="required" aria-hidden="true">*</span>
+                        </label>
+
+                        <select
+                            id="assunto"
+                            name="assunto"
+                            required
+                        >
+
+                            <option value="" selected disabled>
+                                Selecione uma matéria
+                            </option>
+
+                            <option value="matematica">
+                                Matemática
+                            </option>
+
+                            <option value="portugues">
+                                Português
+                            </option>
+
+                            <option value="biologia">
+                                Biologia
+                            </option>
+
+                            <option value="ciencias">
+                                Ciências
+                            </option>
+
+                            <option value="historia">
+                                História
+                            </option>
+
+                            <option value="geografia">
+                                Geografia
+                            </option>
+
+                            <option value="artes">
+                                Artes
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ESCOLARIDADE -->
+
+                    <div class="form-group full">
+
+                        <label for="escolaridade">
+                            Nível de escolaridade
+                            <span class="required" aria-hidden="true">*</span>
+                        </label>
+
+                        <select
+                            id="escolaridade"
+                            name="escolaridade"
+                            required
+                        >
+
+                            <option value="" selected disabled>
+                                Selecione seu nível de escolaridade
+                            </option>
+
+                            <option value="superior-completo">
+                                Ensino superior completo
+                            </option>
+
+                            <option value="mestrado-cursando">
+                                Cursando mestrado
+                            </option>
+
+                            <option value="mestrado-completo">
+                                Mestrado completo
+                            </option>
+
+                            <option value="doutorado-cursando">
+                                Cursando doutorado
+                            </option>
+
+                            <option value="doutorado-completo">
+                                Doutorado completo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TURNOS -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Turnos disponíveis
+                            <span class="required" aria-hidden="true">*</span>
+                        </label>
+
+                        <span class="helper-text">
+                            Selecione um ou mais turnos em que você possui disponibilidade.
+                        </span>
+
+                        <div class="checkbox-group">
+
+                            <div class="checkbox-option">
+
+                                <input
+                                    type="checkbox"
+                                    id="manha"
+                                    name="turnos"
+                                    value="manha"
+                                >
+
+                                <label for="manha">
+                                    Manhã
+                                </label>
+
+                            </div>
+
+
+                            <div class="checkbox-option">
+
+                                <input
+                                    type="checkbox"
+                                    id="tarde"
+                                    name="turnos"
+                                    value="tarde"
+                                >
+
+                                <label for="tarde">
+                                    Tarde
+                                </label>
+
+                            </div>
+
+
+                            <div class="checkbox-option">
+
+                                <input
+                                    type="checkbox"
+                                    id="noite"
+                                    name="turnos"
+                                    value="noite"
+                                >
+
+                                <label for="noite">
+                                    Noite
+                                </label>
+
+                            </div>
+
+
+                            <div class="checkbox-option">
+
+                                <input
+                                    type="checkbox"
+                                    id="integral"
+                                    name="turnos"
+                                    value="integral"
+                                >
+
+                                <label for="integral">
+                                    Integral
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIÇÃO -->
+
+                    <div class="form-group full">
+
+                        <label for="descricao">
+                            Descrição sobre si mesmo
+                            <span class="required" aria-hidden="true">*</span>
+                        </label>
+
+                        <textarea
+                            id="descricao"
+                            name="descricao"
+                            placeholder="Conte um pouco sobre você, sua experiência, formação e por que deseja lecionar..."
+                            minlength="20"
+                            maxlength="1000"
+                            required
+                        ></textarea>
+
+                        <span class="helper-text">
+                            Escreva entre 20 e 1000 caracteres.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MENSAGEM DE RETORNO -->
+
+                <div
+                    id="mensagem"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- BOTÃO -->
+
+                <div class="submit-area">
+
+                    <button
+                        type="submit"
+                    >
+                        Enviar candidatura
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <footer>
+            <p>
+                Formulário de candidatura para professores.
+            </p>
+        </footer>
+
+    </main>
+
+
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
+
+    <script>
+
+        const form = document.getElementById("form");
+        const mensagem = document.getElementById("mensagem");
+
+        form.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            /*
+             * Verifica se todos os campos obrigatórios
+             * do formulário foram preenchidos.
+             */
+
+            if (!form.checkValidity()) {
+
+                form.reportValidity();
+
+                return;
+            }
+
+
+            /*
+             * Verifica se pelo menos um turno
+             * foi selecionado.
+             */
+
+            const turnosSelecionados =
+                document.querySelectorAll(
+                    'input[name="turnos"]:checked'
+                );
+
+            if (turnosSelecionados.length === 0) {
+
+                mensagem.textContent =
+                    "Selecione pelo menos um turno disponível.";
+
+                mensagem.classList.add("sucesso");
+
+                document
+                    .getElementById("manha")
+                    .focus();
+
+                return;
+            }
+
+
+            /*
+             * Exibe mensagem de sucesso.
+             *
+             * Neste exemplo os dados não são enviados
+             * para um servidor.
+             */
+
+            const nome =
+                document.getElementById("nome").value;
+
+            mensagem.textContent =
+                `Candidatura preenchida com sucesso, ${nome}!`;
+
+            mensagem.classList.add("sucesso");
+
+
+            /*
+             * Aqui poderá ser incluída posteriormente
+             * uma integração com:
+             *
+             * - PHP
+             * - Node.js
+             * - API REST
+             * - Firebase
+             * - Supabase
+             * - Google Sheets
+             * - Banco de dados
+             */
+
+        });
+
+    </script>
+
+</body>
+
+</html>

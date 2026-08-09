@@ -1,0 +1,341 @@
+/* =========================================================
+   RESET GLOBAL
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+   ========================================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+
+    /* Fundo da página */
+
+    background:
+        radial-gradient(
+            circle at 25% 20%,
+            rgba(126, 0, 190, 0.35),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(90, 0, 160, 0.35),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #18002d,
+            #39006b,
+            #170027
+        );
+}
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+   ========================================================= */
+
+.container {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    min-height: 467px;
+
+    background-color: #ffffff;
+
+    padding: 15px;
+
+    display: grid;
+
+    grid-template-rows:
+        80px
+        46px
+        244px
+        58px;
+
+    gap: 8px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.cabecalho {
+
+    background-color: #e8ebed;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.menu {
+
+    background-color: #e8ebed;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   ÁREA PRINCIPAL
+   ========================================================= */
+
+.area-principal {
+
+    display: grid;
+
+    grid-template-columns:
+        153px
+        1fr
+        166px;
+
+    gap: 8px;
+
+    min-height: 0;
+}
+
+
+/* =========================================================
+   COLUNAS
+   ========================================================= */
+
+.coluna {
+
+    background-color: #e8ebed;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   CONTEÚDO
+   ========================================================= */
+
+.conteudo {
+
+    background-color: #e8ebed;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+
+.rodape {
+
+    background-color: #e8ebed;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   COMPONENTE REUTILIZÁVEL
+   TÍTULO / CAIXA AZUL
+   ========================================================= */
+
+.titulo-box {
+
+    background-color: #76a6d3;
+
+    border: 1px solid #5b8ebc;
+
+    color: #000000;
+
+    font-size: 28px;
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    text-align: center;
+
+    padding: 3px 10px;
+}
+
+
+/* =========================================================
+   TÍTULO DO MENU
+   ========================================================= */
+
+.menu-box {
+
+    width: 167px;
+}
+
+
+/* =========================================================
+   TÍTULO DAS COLUNAS
+   ========================================================= */
+
+.coluna-box {
+
+    font-size: 28px;
+
+    line-height: 1.15;
+
+    padding: 4px 8px;
+}
+
+
+/* =========================================================
+   TÍTULO DO CONTEÚDO
+   ========================================================= */
+
+.conteudo-box {
+
+    padding: 4px 8px;
+}
+
+
+/* =========================================================
+   TÍTULO DO RODAPÉ
+   ========================================================= */
+
+.rodape-box {
+
+    width: 144px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   TABLET / TELAS MENORES
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    body {
+
+        padding: 15px;
+    }
+
+
+    .container {
+
+        min-height: auto;
+
+        grid-template-rows:
+            80px
+            50px
+            auto
+            60px;
+    }
+
+
+    .area-principal {
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            150px
+            250px
+            150px;
+    }
+
+
+    .coluna {
+
+        min-height: 150px;
+    }
+
+
+    .titulo-box {
+
+        font-size: 24px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   CELULARES
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    body {
+
+        padding: 8px;
+    }
+
+
+    .container {
+
+        padding: 8px;
+
+        gap: 6px;
+    }
+
+
+    .area-principal {
+
+        gap: 6px;
+    }
+
+
+    .titulo-box {
+
+        font-size: 21px;
+    }
+} 
